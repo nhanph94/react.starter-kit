@@ -13,10 +13,7 @@ const supportedGitmojis = new Set(
 
 function headerPattern(breaking = false) {
   const marker = breaking ? '!' : '!?';
-  return new RegExp(
-    `^(?:${gitmojiPattern} )?(\\w*)(?:\\((.*)\\))?${marker}: (.*)$`,
-    'u',
-  );
+  return new RegExp(`^(?:${gitmojiPattern} )?(\\w*)(?:\\((.*)\\))?${marker}: (.*)$`, 'u');
 }
 
 function gitmojiRule(parsed, when = 'always') {
