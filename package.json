@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "start:dev": "vite",
-    "start:preview": "vite preview"
+    "start:preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^19.2.8",
@@ -26,6 +27,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
+    "husky": "^9.1.7",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }
