@@ -21,6 +21,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "cn": "^0.4.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },
@@ -30,15 +31,18 @@
     "@commitlint/config-conventional": "^21.2.3",
     "@commitlint/types": "^21.2.3",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "babel-plugin-react-compiler": "^1.0.0",
+    "daisyui": "^5.7.44",
     "gitmojis": "^3.15.0",
     "husky": "^9.1.7",
     "nano-staged": "^1.0.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   }

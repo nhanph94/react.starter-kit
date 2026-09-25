@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  logs: false;
+}
+
+/* #region themes configs */
+@theme {
+  /* Base theme variables */
+}
+@plugin "daisyui/theme" {
+  name: light;
+  default: true;
+}
+@plugin "daisyui/theme" {
+  name: night;
+  prefersdark: true;
+}
+
+@custom-variant dark {
+  &:where(:root[data-theme="night"], :root[data-theme="night"] *) {
+    @slot;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme]), :root:not([data-theme]) *) {
+      @slot;
+    }
+  }
+}
+:root:not([data-theme]) {
+  color-scheme: light dark;
+}
+:root[data-theme="light"] {
+  color-scheme: only light;
+}
+:root[data-theme="night"] {
+  color-scheme: only dark;
+}
+/* #endregion */
+
+@layer base {
+  /* Base styles */
+}
+
+@layer components {
+  /* Component styles */
+}
+
+@layer utilities {
+  /* Utility styles */
+}

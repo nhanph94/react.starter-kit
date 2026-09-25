@@ -5,7 +5,7 @@ import App from '@/app/App.tsx';
 import { PROVIDERS } from '@/bootstrap/provider';
 import { ProviderBuilder } from '@/libs/provider-builder';
 
-import '@/resources/styles/index.css';
+import '@/resources/styles/main.css';
 
 const root = document.getElementById('root');
 if (!root) {
