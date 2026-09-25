@@ -1,10 +1,5 @@
+import { appConfig } from '@/configs/app';
+
 export default function App() {
-  return (
-    <div>
-      <h1 className="text-2xl font-bold">React / Starter KIT</h1>
-      <button type="button" className="btn btn-primary">
-        Click me
-      </button>
-    </div>
-  );
+  return <h1 className="text-2xl font-bold">{appConfig.title}</h1>;
 }
