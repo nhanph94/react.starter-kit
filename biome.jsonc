@@ -9,7 +9,8 @@
   },
 
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "includes": ["**", "!public/mockServiceWorker.js"]
   },
 
   "formatter": {

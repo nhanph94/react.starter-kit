@@ -1,9 +1,27 @@
+import { rmSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
-import { defineConfig, loadEnv, type UserConfig } from 'vite';
+import { defineConfig, loadEnv, type Plugin, type UserConfig } from 'vite';
 
 import { parseEnv } from './src/configs/env/helper.ts';
+
+const stripMswWorker = (): Plugin => {
+  let outDir = '';
+
+  return {
+    name: 'strip-msw-worker',
+    apply: 'build',
+    configResolved(config) {
+      outDir = resolve(config.root, config.build.outDir);
+    },
+    closeBundle() {
+      rmSync(resolve(outDir, 'mockServiceWorker.js'), { force: true });
+    },
+  };
+};
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -16,7 +34,12 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
-    plugins: [react(), tailwindcss(), babel({ presets: [reactCompilerPreset()] })],
+    plugins: [
+      react(),
+      tailwindcss(),
+      babel({ presets: [reactCompilerPreset()] }),
+      stripMswWorker(),
+    ],
     resolve: {
       tsconfigPaths: true,
     },
