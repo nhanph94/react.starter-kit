@@ -20,7 +20,9 @@
 
     /* Path aliases */
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@test": ["./test"],
+      "@test/*": ["./test/*"]
     },
 
     /* Linting */
@@ -30,5 +32,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vite-env.d.ts"]
+  "include": ["src", "test", "vite-env.d.ts"]
 }
