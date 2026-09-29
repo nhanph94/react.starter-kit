@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-import type { EnvInput } from './src/configs/env/schema.ts';
+import type { EnvInput } from './src/configs/env/schema';
 
 declare global {
   interface ViteTypeOptions {

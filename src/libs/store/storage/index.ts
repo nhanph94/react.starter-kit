@@ -1,0 +1,1 @@
+export { indexedDb } from './idb';

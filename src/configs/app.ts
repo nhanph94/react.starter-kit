@@ -1,4 +1,4 @@
-import { env } from '@/configs/env';
+import env from '@/configs/env';
 import { APP_ENV } from '@/configs/env/schema';
 
 export { APP_ENV };

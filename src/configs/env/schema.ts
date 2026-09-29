@@ -9,11 +9,9 @@ const APP_ENV = {
 const envSchema = z.object({
   VITE_APP_ENV: z.enum(APP_ENV),
 
-  VITE_APP_TITLE: z
-    .string()
-    .optional()
-    .default('React / Starter KIT')
-    .transform((val) => val.trim()),
+  VITE_APP_TITLE: z.string().trim().optional().default('React / Starter KIT'),
+
+  VITE_IDB_STORE: z.string().trim().optional(),
 });
 
 type EnvInput = z.input<typeof envSchema>;

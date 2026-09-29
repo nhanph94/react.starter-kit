@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import App from '@/app/App.tsx';
+import App from '@/app/App';
 import { PROVIDERS } from '@/bootstrap/provider';
 import { ProviderBuilder } from '@/libs/provider-builder';
 
