@@ -6,4 +6,8 @@ export { APP_ENV };
 export const appConfig = {
   env: env.VITE_APP_ENV,
   title: env.VITE_APP_TITLE,
+
+  apiBaseUrl: env.VITE_API_BASE_URL,
+  apiRequestTimeout: env.VITE_API_REQUEST_TIMEOUT,
+  apiRequestWithCredentials: env.VITE_API_REQUEST_WITH_CREDENTIALS,
 } as const;

@@ -6,8 +6,10 @@ import { defineConfig, loadEnv, type UserConfig } from 'vite';
 import { parseEnv } from './src/configs/env/helper.ts';
 
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+
   try {
-    parseEnv(loadEnv(mode, process.cwd(), ''));
+    parseEnv(env);
   } catch (error) {
     console.error(error instanceof Error ? error.message : error);
     process.exit(1);
