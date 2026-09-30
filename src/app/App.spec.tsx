@@ -12,6 +12,12 @@ test('renders the application title from config', () => {
   expect(screen.getByRole('heading', { level: 1, name: appConfig.title })).toBeInTheDocument();
 });
 
+test('transforms SVG files imported with ?react into components', () => {
+  render(<App />);
+
+  expect(screen.getByRole('img', { name: `${appConfig.title} logo` })).toBeInTheDocument();
+});
+
 const HealthIndicator = () => {
   const { data, isPending } = useQuery({
     queryKey: ['health'],

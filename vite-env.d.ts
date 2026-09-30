@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-svgr/client" />
 
 import type { EnvInput } from './src/configs/env/schema';
 

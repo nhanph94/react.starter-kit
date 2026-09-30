@@ -1,5 +1,11 @@
 import { appConfig } from '@/configs/app';
+import Logo from '@/resources/icons/logo.svg?react';
 
 export default function App() {
-  return <h1 className="text-2xl font-bold">{appConfig.title}</h1>;
+  return (
+    <div className="flex items-center gap-2">
+      <Logo className="h-6 w-6" role="img" aria-label={`${appConfig.title} logo`} />
+      <h1 className="text-2xl font-bold">{appConfig.title}</h1>
+    </div>
+  );
 }

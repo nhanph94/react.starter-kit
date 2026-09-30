@@ -5,6 +5,7 @@ import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig, loadEnv, type Plugin, type UserConfig } from 'vite';
+import svgr from 'vite-plugin-svgr';
 
 import { parseEnv } from './src/configs/env/helper.ts';
 
@@ -36,6 +37,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
+      svgr(),
       tailwindcss(),
       babel({ presets: [reactCompilerPreset()] }),
       stripMswWorker(),
