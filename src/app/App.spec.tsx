@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { render, screen } from '@test';
+import { render, screen, waitFor } from '@test';
+import { toast } from 'react-toastify';
 import { expect, test } from 'vitest';
 
 import App from '@/app/App';
@@ -18,6 +19,24 @@ test('transforms SVG files imported with ?react into components', () => {
   render(<App />);
 
   expect(screen.getByRole('img', { name: `${appConfig.title} logo` })).toBeInTheDocument();
+});
+
+test('renders notifications stacked at the bottom right', async () => {
+  render(<App />);
+
+  toast('First notification');
+  toast('Second notification');
+
+  expect(await screen.findByText('First notification')).toBeInTheDocument();
+  expect(await screen.findByText('Second notification')).toBeInTheDocument();
+
+  await waitFor(() => {
+    const container = document.querySelector('.Toastify__toast-container--bottom-right');
+    expect(container).toHaveAttribute('data-stacked', 'true');
+    expect(container?.querySelectorAll('.Toastify__toast--stacked')).toHaveLength(2);
+  });
+
+  toast.dismiss();
 });
 
 const HealthIndicator = () => {
