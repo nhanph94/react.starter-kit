@@ -10,6 +10,8 @@ test('renders the application title from config', () => {
   render(<App />);
 
   expect(screen.getByRole('heading', { level: 1, name: appConfig.title })).toBeInTheDocument();
+  expect(document.title).toBe(appConfig.title);
+  expect(document.head.querySelectorAll('title')).toHaveLength(1);
 });
 
 test('transforms SVG files imported with ?react into components', () => {

@@ -10,6 +10,12 @@ const envSchema = z.object({
   VITE_APP_ENV: z.enum(APP_ENV),
 
   VITE_APP_TITLE: z.string().trim().optional().default('React / Starter KIT'),
+  VITE_APP_DESCRIPTION: z
+    .string()
+    .trim()
+    .optional()
+    .default('A React starter kit powered by TypeScript and Vite.'),
+  VITE_APP_URL: z.url().optional(),
 
   VITE_IDB_STORE: z.string().trim().optional(),
 

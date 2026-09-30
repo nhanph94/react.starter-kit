@@ -7,10 +7,17 @@ test.describe('application shell', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('React / Starter KIT');
   });
 
-  test('sets the document title', async ({ page }) => {
-    await page.goto('/');
+  test('returns metadata in the initial HTML response', async ({ page }) => {
+    const response = await page.goto('/');
 
-    await expect(page).toHaveTitle('react.starter-kit');
+    expect(await response?.text()).toContain('<title>React / Starter KIT</title>');
+    expect(await response?.text()).toContain('name="description"');
+    expect(await response?.text()).toContain('property="og:title"');
+    expect(await response?.text()).toContain('name="twitter:description"');
+
+    await expect(page).toHaveTitle('React / Starter KIT');
+    await expect(page.locator('head > meta[name="description"]')).toHaveCount(1);
+    await expect(page.locator('head > meta[property="og:title"]')).toHaveCount(1);
   });
 
   test('boots without runtime errors', async ({ page }) => {
