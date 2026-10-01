@@ -1,0 +1,3 @@
+allowBuilds:
+  # MSW postinstall refreshes the checked-in service worker in public/.
+  msw: true

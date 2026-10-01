@@ -10,7 +10,7 @@ import '@/resources/styles/main.css';
 const enableMocking = async () => {
   if (!import.meta.env.DEV) return;
   const { worker } = await import('@/mocks/browser');
-  await worker.start({ onUnhandledFrame: 'bypass' });
+  await worker.start({ onUnhandledRequest: 'bypass' });
 };
 
 const root = document.getElementById('root');

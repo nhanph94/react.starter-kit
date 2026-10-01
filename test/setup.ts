@@ -8,7 +8,7 @@ import { server } from '@/mocks/node';
 // Mock Service Worker: intercept network requests during tests.
 // Handlers live in `src/mocks/handlers.ts`; per-test overrides via `server.use(...)`.
 beforeAll(() => {
-  server.listen({ onUnhandledFrame: 'bypass' });
+  server.listen({ onUnhandledRequest: 'bypass' });
 });
 
 afterEach(() => {
