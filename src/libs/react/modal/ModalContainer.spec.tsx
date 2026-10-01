@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { type ReactElement, useEffect, useState } from 'react';
 import { beforeAll, expect, test } from 'vitest';
 
-import { ModalContainer, modal } from '@/libs/modal';
+import { ModalContainer, modal } from '@/libs/react/modal';
 
 beforeAll(() => {
   HTMLDialogElement.prototype.showModal = function showModal() {

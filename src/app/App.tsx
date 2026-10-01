@@ -2,7 +2,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Metadata } from '@/app/common/components';
 import { appConfig } from '@/configs/app';
-import { ModalContainer } from '@/libs/modal';
+import { ModalContainer } from '@/libs/react/modal';
 import Logo from '@/resources/icons/logo.svg?react';
 
 export default function App() {
