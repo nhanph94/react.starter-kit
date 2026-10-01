@@ -8,7 +8,7 @@ backend architecture.
 ## Included
 
 - React 19, TypeScript, and Vite.
-- Tailwind CSS 4 with DaisyUI, light/night themes, and an accessible theme toggle.
+- Tailwind CSS 4 with DaisyUI, light/night/system themes, and an accessible theme toggle.
 - TanStack Query for server state and Zustand for client state.
 - Axios HTTP client with configurable authentication and refresh-token support.
 - Zod-validated environment variables and MSW network mocks.
@@ -109,8 +109,9 @@ unrelated business logic.
   `QueryClient` and exposes Query Devtools only in development.
 - Use Zustand for local client state. `createStore` supports Immer, persistence,
   Redux DevTools, selector subscriptions, and local/session/IndexedDB storage.
-- The global store persists the selected `light` or `night` theme and migrates
-  the legacy `dark` value.
+- The global store persists the selected `light`, `night`, or `system` theme.
+  `system` removes `data-theme`, allowing DaisyUI to follow the operating-system
+  preference; the legacy `dark` value migrates to `night`.
 
 Use IndexedDB only when a feature needs durable client-side data; it adds
 schema and versioning concerns that most application state does not require.

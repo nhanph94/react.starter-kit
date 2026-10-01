@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { render, screen, waitFor } from '@test';
+import { render, screen, userEvent, waitFor } from '@test';
 import { toast } from 'react-toastify';
 import { expect, test } from 'vitest';
 
@@ -27,6 +27,32 @@ test('applies the persisted theme to the document root', () => {
   render(<App />);
 
   expect(document.documentElement).toHaveAttribute('data-theme', 'night');
+
+  useGlobalStore.getState().setTheme('light');
+});
+
+test('follows the operating system when the system theme is selected', () => {
+  document.documentElement.dataset.theme = 'night';
+  useGlobalStore.getState().setTheme('system');
+  render(<App />);
+
+  expect(document.documentElement).not.toHaveAttribute('data-theme');
+
+  useGlobalStore.getState().setTheme('light');
+});
+
+test('shows each theme preference and applies the selected preference', async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  expect(screen.getByRole('button', { name: 'light', pressed: true })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'night', pressed: false })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'system', pressed: false })).toBeInTheDocument();
+
+  await user.click(screen.getByRole('button', { name: 'system' }));
+
+  expect(useGlobalStore.getState().theme).toBe('system');
+  expect(document.documentElement).not.toHaveAttribute('data-theme');
 
   useGlobalStore.getState().setTheme('light');
 });

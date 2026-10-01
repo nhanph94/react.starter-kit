@@ -1,6 +1,6 @@
 import createStore from '@/libs/store';
 
-type Theme = 'light' | 'night';
+type Theme = 'light' | 'night' | 'system';
 
 type GlobalState = {
   theme: Theme;
@@ -11,7 +11,10 @@ const migrateGlobalState = (persistedState: unknown): Partial<GlobalState> => {
   if (!persistedState || typeof persistedState !== 'object') return { theme: 'light' };
 
   const { theme } = persistedState as { theme?: unknown };
-  return { theme: theme === 'night' || theme === 'dark' ? 'night' : 'light' };
+  return {
+    theme:
+      theme === 'night' || theme === 'dark' ? 'night' : theme === 'system' ? 'system' : 'light',
+  };
 };
 
 const useGlobalStore = createStore<GlobalState>(

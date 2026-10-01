@@ -15,6 +15,10 @@ test('migrates the legacy dark theme to night', () => {
   expect(migrateGlobalState({ theme: 'dark' })).toEqual({ theme: 'night' });
 });
 
+test('preserves the system theme during migration', () => {
+  expect(migrateGlobalState({ theme: 'system' })).toEqual({ theme: 'system' });
+});
+
 test('setTheme updates the theme', () => {
   useGlobalStore.getState().setTheme('night');
 
