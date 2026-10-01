@@ -1,6 +1,6 @@
 import { beforeEach, expect, test, vi } from 'vitest';
 
-import { useGlobalStore } from '@/app/common/hooks';
+import { migrateGlobalState, useGlobalStore } from '@/app/common/hooks';
 
 beforeEach(() => {
   localStorage.clear();
@@ -11,14 +11,18 @@ test('starts with the light theme', () => {
   expect(useGlobalStore.getState().theme).toBe('light');
 });
 
-test('setTheme updates the theme', () => {
-  useGlobalStore.getState().setTheme('dark');
+test('migrates the legacy dark theme to night', () => {
+  expect(migrateGlobalState({ theme: 'dark' })).toEqual({ theme: 'night' });
+});
 
-  expect(useGlobalStore.getState().theme).toBe('dark');
+test('setTheme updates the theme', () => {
+  useGlobalStore.getState().setTheme('night');
+
+  expect(useGlobalStore.getState().theme).toBe('night');
 });
 
 test('persists the theme to local storage', () => {
-  useGlobalStore.getState().setTheme('dark');
+  useGlobalStore.getState().setTheme('night');
 
   expect(localStorage.length).toBeGreaterThan(0);
 });
@@ -27,7 +31,7 @@ test('notifies subscribers when the theme changes', () => {
   const listener = vi.fn();
   const unsubscribe = useGlobalStore.subscribe(listener);
 
-  useGlobalStore.getState().setTheme('dark');
+  useGlobalStore.getState().setTheme('night');
 
   expect(listener).toHaveBeenCalled();
 

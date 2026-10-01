@@ -91,6 +91,6 @@ test('updates metadata without duplicates and removes optional tags when navigat
   expect(document.title).toBe(metadataTitle.default);
   expect(document.head.querySelector('meta[name="robots"]')).toHaveAttribute(
     'content',
-    'index, follow',
+    'noindex, nofollow',
   );
 });

@@ -2,7 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import type { PropsWithChildren } from 'react';
 import { expect, test } from 'vitest';
 
-import { ProviderBuilder, type ProviderDescriptor } from '@/libs/provider-builder';
+import { ProviderBuilder, type ProviderDescriptor } from '@/libs/react/provider-builder';
 
 type ProbeProps = { label: string };
 

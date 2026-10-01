@@ -30,7 +30,10 @@ export function Metadata({ metadata }: MetadataProps) {
     <>
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
-      <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
+      <meta
+        name="robots"
+        content={noIndex || appConfig.env !== 'production' ? 'noindex, nofollow' : 'index, follow'}
+      />
       {pageCanonicalUrl && <link rel="canonical" href={pageCanonicalUrl} />}
       <meta property="og:type" content="website" />
       <meta property="og:title" content={pageTitle} />

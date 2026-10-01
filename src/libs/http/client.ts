@@ -24,7 +24,9 @@ function createHttpClient(configs: HttpClientConfig): AxiosInstance {
     headers: { Accept: 'application/json' },
     baseURL: configs.baseURL,
     timeout: configs.timeout ?? 10_000,
-    withCredentials: configs.withCredentials ?? true,
+    // Cross-origin credentials should be an explicit opt-in. This avoids
+    // accidental cookie sharing when a project only configures a base URL.
+    withCredentials: configs.withCredentials ?? false,
   });
 
   const reject = configs.onRejected ?? rejectHttpError;

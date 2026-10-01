@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import App from '@/app/App';
 import { PROVIDERS } from '@/bootstrap/provider';
-import { ProviderBuilder } from '@/libs/provider-builder';
+import { ProviderBuilder } from '@/libs/react/provider-builder';
 
 import '@/resources/styles/main.css';
 

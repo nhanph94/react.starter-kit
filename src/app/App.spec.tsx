@@ -5,6 +5,7 @@ import { expect, test } from 'vitest';
 
 import App from '@/app/App';
 import { apiClient } from '@/app/common/apiClient';
+import { useGlobalStore } from '@/app/common/hooks';
 import { appConfig } from '@/configs/app';
 
 test('renders the application title from config', () => {
@@ -19,6 +20,15 @@ test('transforms SVG files imported with ?react into components', () => {
   render(<App />);
 
   expect(screen.getByRole('img', { name: `${appConfig.title} logo` })).toBeInTheDocument();
+});
+
+test('applies the persisted theme to the document root', () => {
+  useGlobalStore.getState().setTheme('night');
+  render(<App />);
+
+  expect(document.documentElement).toHaveAttribute('data-theme', 'night');
+
+  useGlobalStore.getState().setTheme('light');
 });
 
 test('renders notifications stacked at the bottom right', async () => {

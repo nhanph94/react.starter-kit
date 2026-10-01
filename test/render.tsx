@@ -1,9 +1,9 @@
 import { type RenderOptions, type RenderResult, render } from '@testing-library/react';
 import type { PropsWithChildren, ReactElement } from 'react';
 
-import type { ProviderDescriptor } from '@/libs/provider-builder';
+import type { ProviderDescriptor } from '@/libs/react/provider-builder';
 import { PROVIDERS } from '@/bootstrap/provider';
-import { ProviderBuilder } from '@/libs/provider-builder';
+import { ProviderBuilder } from '@/libs/react/provider-builder';
 
 type RenderWithProvidersOptions = Omit<RenderOptions, 'wrapper'> & {
   /** Override the app providers (defaults to the production `PROVIDERS` list). */

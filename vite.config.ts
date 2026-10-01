@@ -28,17 +28,19 @@ const staticMetadataFallback = ({
   title,
   description,
   url,
+  robots,
 }: {
   title: string;
   description: string;
   url?: string;
+  robots: string;
 }): Plugin => ({
   name: 'static-metadata-fallback',
   transformIndexHtml(): HtmlTagDescriptor[] {
     const tags: HtmlTagDescriptor[] = [
       { tag: 'title', children: title, injectTo: 'head' },
       { tag: 'meta', attrs: { name: 'description', content: description }, injectTo: 'head' },
-      { tag: 'meta', attrs: { name: 'robots', content: 'index, follow' }, injectTo: 'head' },
+      { tag: 'meta', attrs: { name: 'robots', content: robots }, injectTo: 'head' },
       { tag: 'meta', attrs: { property: 'og:type', content: 'website' }, injectTo: 'head' },
       { tag: 'meta', attrs: { property: 'og:title', content: title }, injectTo: 'head' },
       {
@@ -88,6 +90,7 @@ export default defineConfig(({ mode }) => {
         title: appEnv.VITE_APP_TITLE,
         description: appEnv.VITE_APP_DESCRIPTION,
         url: appEnv.VITE_APP_URL,
+        robots: appEnv.VITE_APP_ENV === 'production' ? 'index, follow' : 'noindex, nofollow',
       }),
     ],
     resolve: {

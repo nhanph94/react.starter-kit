@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, test, vi } from 'vitest';
 
-import { DefaultErrorFallback, ErrorBoundary } from '@/libs/error-boundary';
+import { DefaultErrorFallback, ErrorBoundary } from '@/libs/react/error-boundary';
 
 const Bomb = ({ shouldThrow }: { shouldThrow: boolean }) => {
   if (shouldThrow) throw new Error('boom');
