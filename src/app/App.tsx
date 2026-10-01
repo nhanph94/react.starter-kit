@@ -2,6 +2,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { Metadata } from '@/app/common/components';
 import { appConfig } from '@/configs/app';
+import { ModalContainer } from '@/libs/modal';
 import Logo from '@/resources/icons/logo.svg?react';
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
         <h1 className="text-2xl font-bold">{appConfig.title}</h1>
       </div>
 
+      <ModalContainer />
       <ToastContainer position="bottom-right" stacked />
     </>
   );
