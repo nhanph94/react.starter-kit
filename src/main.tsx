@@ -18,7 +18,7 @@ if (!root) {
   throw new Error('Root element "#root" was not found');
 }
 
-enableMocking().then(() => {
+const renderApp = () => {
   createRoot(root).render(
     <StrictMode>
       <ProviderBuilder providers={PROVIDERS}>
@@ -26,4 +26,10 @@ enableMocking().then(() => {
       </ProviderBuilder>
     </StrictMode>,
   );
-});
+};
+
+enableMocking()
+  .catch((error: unknown) => {
+    console.warn('MSW failed to start; continuing without API mocks.', error);
+  })
+  .finally(renderApp);

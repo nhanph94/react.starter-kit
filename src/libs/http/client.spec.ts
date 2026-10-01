@@ -23,3 +23,23 @@ test('maps known HTTP failures to HttpError', async () => {
     message: 'Forbidden',
   });
 });
+
+test('preserves API error details for forms and feature-level handling', async () => {
+  server.use(
+    http.post('/api/users', () =>
+      HttpResponse.json(
+        { code: 'EMAIL_TAKEN', message: 'Email is already registered' },
+        { status: 422, headers: { 'x-request-id': 'request-123' } },
+      ),
+    ),
+  );
+  const client = createHttpClient({ baseURL: apiBaseUrl });
+
+  await expect(client.post('/api/users')).rejects.toMatchObject({
+    name: HttpError.name,
+    status: 422,
+    code: 'EMAIL_TAKEN',
+    message: 'Email is already registered',
+    requestId: 'request-123',
+  });
+});

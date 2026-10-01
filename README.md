@@ -136,6 +136,10 @@ backend's refresh path and header/body format. Prefer in-memory tokens or
 HttpOnly cookies. Persist browser tokens only when the product threat model
 accepts the XSS risk, and implement logout/session-expiry behavior in the app.
 
+The HTTP layer normalizes Axios failures as `HttpError`, including the HTTP
+status, backend error code, response body, and `x-request-id` when present.
+Use these fields for form validation, conflict handling, and support diagnostics.
+
 ## Metadata and SEO
 
 Use `Metadata` once per active page. React 19 hoists its tags into the document
@@ -165,6 +169,9 @@ Playwright smoke tests live in `test/e2e`. GitHub Actions runs formatting,
 coverage, production build, and E2E tests on pull requests and pushes to
 `main`, then uploads coverage and Playwright artifacts.
 
+The default coverage gate protects against overall regression. Raise its
+thresholds as domain features and their tests are added.
+
 ## Deployment and security
 
 Deploy the contents of `dist/` to a static host after `pnpm build`. Configure
@@ -177,6 +184,10 @@ hosting-layer security headers to match the application's real origins:
 
 Do not enable credentials, persistent bearer tokens, analytics origins, or a
 service worker by default without a product-specific security review.
+
+`ErrorBoundary` reports through a provider-neutral monitoring adapter. Connect
+Sentry, OpenTelemetry, or another service at application bootstrap with
+`setErrorReporter`; monitoring is intentionally not bundled with the template.
 
 ## After cloning this template
 

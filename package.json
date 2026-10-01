@@ -11,7 +11,7 @@
   "author": {
     "name": "Nhan Phan",
     "email": "hi@nhanphan.net",
-    "url": "https:/www.nhanphan.net"
+    "url": "https://www.nhanphan.net"
   },
   "scripts": {
     "start:dev": "vite",
@@ -33,7 +33,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.104.0",
     "axios": "^1.20.0",
-    "cn": "^0.4.0",
     "immer": "^11.1.18",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
