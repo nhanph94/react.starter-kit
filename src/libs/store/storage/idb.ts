@@ -184,7 +184,7 @@ const idbVersionFromPackage = (version: string) => {
 const indexedDb = createIndexedDbStorage({
   databaseName: env.VITE_IDB_STORE || packageJson.name,
   version: idbVersionFromPackage(packageJson.version),
-  recreate: env.VITE_APP_ENV === APP_ENV.DEVELOPMENT,
+  recreate: env.MODE === APP_ENV.DEVELOPMENT,
 });
 
 export { indexedDb };

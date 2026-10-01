@@ -4,7 +4,7 @@ import { APP_ENV } from '@/configs/env/schema';
 export { APP_ENV };
 
 export const appConfig = {
-  env: env.VITE_APP_ENV,
+  env: env.MODE,
   title: env.VITE_APP_TITLE,
   description: env.VITE_APP_DESCRIPTION,
   url: env.VITE_APP_URL,

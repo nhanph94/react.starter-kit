@@ -4,11 +4,12 @@ const APP_ENV = {
   DEVELOPMENT: 'development',
   STAGING: 'staging',
   PRODUCTION: 'production',
+  TEST: 'test',
 } as const;
 
-const envSchema = z.object({
-  VITE_APP_ENV: z.enum(APP_ENV),
+const appEnvSchema = z.enum(APP_ENV);
 
+const envSchema = z.object({
   VITE_APP_TITLE: z.string().trim().optional().default('React / Starter KIT'),
   VITE_APP_DESCRIPTION: z
     .string()
@@ -37,6 +38,7 @@ const envSchema = z.object({
 
 type EnvInput = z.input<typeof envSchema>;
 type Env = z.output<typeof envSchema>;
+type AppEnv = z.output<typeof appEnvSchema>;
 
-export type { Env, EnvInput };
-export { APP_ENV, envSchema };
+export type { AppEnv, Env, EnvInput };
+export { APP_ENV, appEnvSchema, envSchema };

@@ -8,6 +8,7 @@ import { defineConfig, type HtmlTagDescriptor, loadEnv, type Plugin, type UserCo
 import svgr from 'vite-plugin-svgr';
 
 import { parseEnv } from './src/configs/env/helper.ts';
+import { APP_ENV } from './src/configs/env/schema.ts';
 
 const stripMswWorker = (): Plugin => {
   let outDir = '';
@@ -90,7 +91,7 @@ export default defineConfig(({ mode }) => {
         title: appEnv.VITE_APP_TITLE,
         description: appEnv.VITE_APP_DESCRIPTION,
         url: appEnv.VITE_APP_URL,
-        robots: appEnv.VITE_APP_ENV === 'production' ? 'index, follow' : 'noindex, nofollow',
+        robots: mode === APP_ENV.PRODUCTION ? 'index, follow' : 'noindex, nofollow',
       }),
     ],
     resolve: {

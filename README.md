@@ -43,7 +43,6 @@ startup. Never put secrets, private API keys, or credentials in these values.
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| `VITE_APP_ENV` | Yes | `development`, `staging`, or `production`. |
 | `VITE_APP_TITLE` | No | Default document and social title. |
 | `VITE_APP_DESCRIPTION` | No | Default document and social description. |
 | `VITE_APP_URL` | No | Absolute canonical public URL. |
@@ -52,9 +51,10 @@ startup. Never put secrets, private API keys, or credentials in these values.
 | `VITE_API_REQUEST_WITH_CREDENTIALS` | No | Set to `true` only for a cookie-based API requiring cross-origin credentials. |
 | `VITE_IDB_STORE` | No | IndexedDB database name; defaults to the package name. |
 
-Vite's build mode and `VITE_APP_ENV` are intentionally separate. Set
-`VITE_APP_ENV=production` for production deployment; development and staging
-automatically emit `noindex, nofollow` metadata.
+Vite's built-in `MODE` is the single source of environment state. It is
+`development` for `pnpm start:dev` and `production` for `pnpm build`; use Vite's
+`--mode staging` option for a staging build. Only `production` is indexable;
+development, staging, and test builds emit `noindex, nofollow` metadata.
 
 ## Scripts
 

@@ -1,5 +1,9 @@
-import { parseEnv } from './helper';
-import type { Env } from './schema';
+import { parseAppEnv, parseEnv } from './helper';
+import type { AppEnv, Env } from './schema';
 
-export type { Env };
-export default parseEnv(import.meta.env);
+export type { AppEnv, Env };
+
+export default {
+  ...parseEnv(import.meta.env),
+  MODE: parseAppEnv(import.meta.env.MODE),
+};

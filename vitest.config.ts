@@ -14,9 +14,8 @@ export default defineConfig({
     // and are run by Playwright, not Vitest.
     include: ['src/**/*.spec.{ts,tsx}'],
     restoreMocks: true,
-    // Deterministic env for tests, independent from the (gitignored) .env files.
+    // Deterministic API configuration, independent from the gitignored .env files.
     env: {
-      VITE_APP_ENV: 'development',
       VITE_API_BASE_URL: '',
     },
     coverage: {

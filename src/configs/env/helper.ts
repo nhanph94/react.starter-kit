@@ -1,6 +1,6 @@
 import type { z } from 'zod';
 
-import { type Env, envSchema } from './schema.ts';
+import { type AppEnv, appEnvSchema, type Env, envSchema } from './schema.ts';
 
 const formatEnvError = (error: z.ZodError) => {
   const errorsByVariable = error.issues.reduce<Record<string, string[]>>((acc, issue) => {
@@ -35,4 +35,14 @@ const parseEnv = (raw: unknown): Env => {
   return parsed.data;
 };
 
-export { parseEnv };
+const parseAppEnv = (raw: unknown): AppEnv => {
+  const parsed = appEnvSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    throw new Error(formatEnvError(parsed.error));
+  }
+
+  return parsed.data;
+};
+
+export { parseAppEnv, parseEnv };
