@@ -39,6 +39,29 @@ application synchronizes it to `<html data-theme="…">`.
 Search engines are allowed to index only production builds. Development and
 staging builds receive `noindex, nofollow` metadata automatically.
 
+## Authentication recipe
+
+The default client is deliberately unauthenticated. For a cookie-based session,
+make credentials an explicit opt-in:
+
+```ts
+const apiClient = createHttpClient({
+  baseURL: appConfig.apiBaseUrl,
+  withCredentials: true,
+});
+```
+
+For a bearer-token backend, configure the supplied `auth` option and keep tokens
+in memory unless the threat model specifically permits persistent browser
+storage. Configure the refresh endpoint, header format, and logout/session-expiry
+handling for the backend; no endpoint is assumed by this template.
+
+## Deployment baseline
+
+Set CSP, HSTS, `X-Content-Type-Options`, and `Referrer-Policy` at the hosting
+layer. The template cannot safely prescribe these headers because permitted API,
+analytics, and asset origins differ by project.
+
 ## Metadata / SEO
 
 `Metadata` from `@/app/common/components` uses a single `metadata` object. The

@@ -2,6 +2,11 @@
   "name": "react.starter-kit",
   "private": true,
   "version": "0.0.0",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=12.0.0"
+  },
   "type": "module",
   "author": {
     "name": "Nhan Phan",

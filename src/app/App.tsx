@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 
-import { Metadata } from '@/app/common/components';
+import { Metadata, ThemeToggle } from '@/app/common/components';
 import { useGlobalStore } from '@/app/common/hooks';
 import { appConfig } from '@/configs/app';
 import { ModalContainer } from '@/libs/react/modal';
@@ -22,6 +22,7 @@ export default function App() {
       <div className="flex items-center gap-2">
         <Logo className="h-6 w-6" role="img" aria-label={`${appConfig.title} logo`} />
         <h1 className="text-2xl font-bold">{appConfig.title}</h1>
+        <ThemeToggle />
       </div>
 
       <ModalContainer />
