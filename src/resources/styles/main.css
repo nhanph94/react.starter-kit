@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "daisyui" {
   logs: false;
+  themes:
+    light --default,
+    night --prefersdark;
 }
 
 /* #region themes configs */
@@ -17,26 +20,11 @@
   --radius-surface: 0.75rem;
   --shadow-surface: 0 1px 3px rgb(15 23 42 / 12%);
 }
-@plugin "daisyui/theme" {
-  name: light;
-  default: true;
-}
-@plugin "daisyui/theme" {
-  name: night;
-  prefersdark: true;
-}
-
 @custom-variant dark {
-  &:where(:root[data-theme="night"], :root[data-theme="night"] *) {
-    @slot;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    &:where(:root:not([data-theme]), :root:not([data-theme]) *) {
-      @slot;
-    }
-  }
+  /* @generated:theme-dark-variant */
+  /* @endgenerated */
 }
+/* @generated:theme-color-schemes */
 :root:not([data-theme]) {
   color-scheme: light dark;
 }
@@ -46,6 +34,7 @@
 :root[data-theme="night"] {
   color-scheme: only dark;
 }
+/* @endgenerated */
 /* #endregion */
 
 @layer base {

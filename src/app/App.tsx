@@ -7,27 +7,33 @@ import { appConfig } from '@/configs/app';
 import { ModalContainer } from '@/libs/react/modal';
 import Logo from '@/resources/icons/logo.svg?react';
 
-const THEME_OPTIONS = ['light', 'night', 'system'] as const;
+import { themes } from 'virtual:theme-registry';
+
+const labelForTheme = (theme: string) => theme.replace(/[-_]/g, ' ');
 
 const ThemeToggle = () => {
   const theme = useGlobalStore((state) => state.theme);
   const setTheme = useGlobalStore((state) => state.setTheme);
 
   return (
-    <fieldset className="join">
-      <legend className="sr-only">Theme preference</legend>
-      {THEME_OPTIONS.map((option) => (
-        <button
-          key={option}
-          type="button"
-          className={`join-item btn btn-sm ${theme === option ? 'btn-primary' : 'btn-ghost'}`}
-          aria-pressed={theme === option}
-          onClick={() => setTheme(option)}
-        >
-          {option}
-        </button>
-      ))}
-    </fieldset>
+    <>
+      <label className="sr-only" htmlFor="theme-preference">
+        Theme preference
+      </label>
+      <select
+        id="theme-preference"
+        className="select select-sm"
+        value={theme}
+        onChange={(event) => setTheme(event.currentTarget.value)}
+      >
+        {themes.map((option) => (
+          <option key={option.name} value={option.name}>
+            {labelForTheme(option.name)}
+          </option>
+        ))}
+        <option value="system">System</option>
+      </select>
+    </>
   );
 };
 

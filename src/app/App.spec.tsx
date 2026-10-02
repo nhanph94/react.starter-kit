@@ -41,15 +41,17 @@ test('follows the operating system when the system theme is selected', () => {
   useGlobalStore.getState().setTheme('light');
 });
 
-test('shows each theme preference and applies the selected preference', async () => {
+test('shows generated theme options and applies the selected preference', async () => {
   const user = userEvent.setup();
   render(<App />);
 
-  expect(screen.getByRole('button', { name: 'light', pressed: true })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'night', pressed: false })).toBeInTheDocument();
-  expect(screen.getByRole('button', { name: 'system', pressed: false })).toBeInTheDocument();
+  const themeSelector = screen.getByRole('combobox', { name: 'Theme preference' });
+  expect(themeSelector).toHaveValue('light');
+  expect(screen.getByRole('option', { name: 'light' })).toBeInTheDocument();
+  expect(screen.getByRole('option', { name: 'night' })).toBeInTheDocument();
+  expect(screen.getByRole('option', { name: 'System' })).toBeInTheDocument();
 
-  await user.click(screen.getByRole('button', { name: 'system' }));
+  await user.selectOptions(themeSelector, 'system');
 
   expect(useGlobalStore.getState().theme).toBe('system');
   expect(document.documentElement).not.toHaveAttribute('data-theme');

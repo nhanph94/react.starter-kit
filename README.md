@@ -116,6 +116,33 @@ unrelated business logic.
 Use IndexedDB only when a feature needs durable client-side data; it adds
 schema and versioning concerns that most application state does not require.
 
+## Themes
+
+The theme dropdown is generated from `src/resources/styles/main.css`. Add a
+DaisyUI built-in theme in the main plugin configuration:
+
+```css
+@plugin "daisyui" {
+  themes: light --default, night --prefersdark, cupcake;
+}
+```
+
+Or add a custom DaisyUI theme block:
+
+```css
+@plugin "daisyui/theme" {
+  name: ocean;
+  prefersdark: true;
+  /* DaisyUI theme tokens */
+}
+```
+
+The same name may appear in both declarations: `themes:` controls display
+order, while explicit `default` and `prefersdark` values in the custom block
+take precedence. Names may not repeat within either declaration. `themes: all`
+is not supported because the switcher needs an explicit list. `system` is
+always available in the UI and follows the operating-system color preference.
+
 ## HTTP and authentication
 
 `apiClient` is unauthenticated by default and does not send cross-origin

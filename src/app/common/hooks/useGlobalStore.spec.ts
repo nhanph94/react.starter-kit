@@ -1,14 +1,16 @@
 import { beforeEach, expect, test, vi } from 'vitest';
 
-import { migrateGlobalState, useGlobalStore } from '@/app/common/hooks';
+import { migrateGlobalState, normalizeTheme, useGlobalStore } from '@/app/common/hooks';
+
+import { defaultTheme } from 'virtual:theme-registry';
 
 beforeEach(() => {
   localStorage.clear();
-  useGlobalStore.setState({ theme: 'light' });
+  useGlobalStore.setState({ theme: defaultTheme });
 });
 
-test('starts with the light theme', () => {
-  expect(useGlobalStore.getState().theme).toBe('light');
+test('starts with the configured default theme', () => {
+  expect(useGlobalStore.getState().theme).toBe(defaultTheme);
 });
 
 test('migrates the legacy dark theme to night', () => {
@@ -17,6 +19,17 @@ test('migrates the legacy dark theme to night', () => {
 
 test('preserves the system theme during migration', () => {
   expect(migrateGlobalState({ theme: 'system' })).toEqual({ theme: 'system' });
+});
+
+test('falls back to the default theme for unknown persisted values', () => {
+  expect(migrateGlobalState({ theme: 'unknown-theme' })).toEqual({ theme: defaultTheme });
+});
+
+test('normalizes unknown theme selections to the default theme', () => {
+  expect(normalizeTheme('unknown-theme')).toBe(defaultTheme);
+  useGlobalStore.getState().setTheme('unknown-theme');
+
+  expect(useGlobalStore.getState().theme).toBe(defaultTheme);
 });
 
 test('setTheme updates the theme', () => {

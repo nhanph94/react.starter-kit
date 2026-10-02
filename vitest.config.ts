@@ -1,9 +1,30 @@
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import { defineConfig } from 'vitest/config';
 
+import { parseThemeRegistry, themeRegistryModule } from './src/configs/theme/registry.ts';
+
+const THEME_REGISTRY_MODULE = 'virtual:theme-registry';
+const RESOLVED_THEME_REGISTRY_MODULE = `\0${THEME_REGISTRY_MODULE}`;
+
+const themeRegistryPlugin = () => ({
+  name: 'theme-registry-test',
+  resolveId(id: string) {
+    return id === THEME_REGISTRY_MODULE ? RESOLVED_THEME_REGISTRY_MODULE : undefined;
+  },
+  load(id: string) {
+    if (id !== RESOLVED_THEME_REGISTRY_MODULE) return undefined;
+
+    const css = readFileSync(resolve(process.cwd(), 'src/resources/styles/main.css'), 'utf8');
+    return themeRegistryModule(parseThemeRegistry(css));
+  },
+});
+
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [themeRegistryPlugin(), react(), svgr()],
   resolve: {
     tsconfigPaths: true,
   },
